@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@200&family=Lumanosimo&family=Mukta:wght@300&family=Rubik&family=Ysabeau+SC:wght@500&display=swap');
+        body{
+            background-image: url("https://www.reallusion.com/ContentStore/CTA/Pack/G3-Animation-Suite-Weather-Maker/images/sunny.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            font-family: 'Roboto Slab', serif;
+        
+        }
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 20px;
+            font-size: 25px;
+        }
+        
+        input[type="text"] {
+            width: 200px;
+            padding: 5px;
+            margin-right: 10px;
+        }
+        
+        button {
+            padding: 5px 10px;
+        }
+        
+        #currentWeather {
+            margin-top: 20px;
+        }
+        #currentweather1{
+            width:450px;
+            height: 360px;
+            border: 2px solid black;
+            border-radius: 50px;
+            font-size: 20px;
+            background-color: #fdfbfb93;
+            padding: 20px;
+        }
+        #h2{
+            font-size: 30px;
+            padding-bottom: 20px;
+        }
+        p{
+            display: flex;
+            flex-direction: row;
+            padding-left: 80px;
+        }
+        img{
+            border-radius: 30%;
+           
+        }
+        #error{
+            width: 350px;
+            height: 50px;
+            border: 2px solid black;
+            background-color: #f9f9f795;
+            border-radius: 10px;
+            margin-left: 30px;
+        }</style>
+    <title>Weather Forecast App</title>
+    <link href="style.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    </head>
+<body>
+    <div class="container">
+        <h1>Weather Forecast</h1>
+        <input type="text" id="cityInput" placeholder="Enter city name">
+        <button onclick="getWeather()">Get Forecast</button>
+
+        <div id="currentWeather"></div>
+
+        
+    </div>
+
+    <script>function getWeather() {
+        var city = document.getElementById("cityInput").value;
+        var apiKey = "2a285b065d5ea35a97d08ba096fe6905"; 
+        
+        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`)
+            .then(response => {
+                if(!response.ok){
+                    throw new Error("city not found");
+                }
+                return response.json();})
+            .then(data => {
+                var currentWeather = document.getElementById("currentWeather");
+                currentWeather.innerHTML = `
+                    <div id="currentweather1">
+                    <h2 id="h2">Current Weather in ${data.name}</h2>
+                    <p><img src="https://tse1.mm.bing.net/th?id=OIP.pVW_NYkez0cJLoDpBm9xxQHaHa&pid=Api&P=0&h=180" width="30px" height="30px">&nbsp&nbsp&nbsp<span>Temperature: ${data.main.temp}°C</span></p>
+                    <p ><img src="https://cdn.iconscout.com/icon/free/png-256/free-humidity-4596680-3796777.png?f=webp" width="30px" height="30px">&nbsp&nbsp&nbsp<span>Humidity: ${data.main.humidity}%</span></p>
+                    <p><img src="https://static.thenounproject.com/png/418198-200.png" width="30px" height="30px">&nbsp&nbsp&nbsp<span>Wind Speed: ${data.wind.speed} m/s</span></p>
+                    <p><img src="https://static.thenounproject.com/png/247168-200.png" width="30px" height="30px">&nbsp&nbsp&nbsp<span>Weather Condition: ${data.weather[0].main}</span></p>
+                    <p><img src="https://static.thenounproject.com/png/133028-200.png" width="30px" height="30px">&nbsp&nbsp&nbsp<span>Date and Time: ${new Date().toLocaleString()}</span></p>
+                    </div>
+                `;
+            })
+            .catch(error => {
+            
+                var currentWeather = document.getElementById("currentWeather");
+                currentWeather.innerHTML = `<p id="error">Error:${error.message}</p>`;
+            });
+        
+    }</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+</body>

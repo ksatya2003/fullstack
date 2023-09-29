@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head><style>
+        button{
+            background-color:#6495ed ;
+            padding: 5px;
+            font-size: large;
+        }
+        .container{
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+        }
+        body{
+            background-image:url("https://reactjsexample.com/content/images/2020/04/WEATHER-APP.png");
+            background-repeat: no-repeat;
+            background-size: cover;
+            margin-top: 220px;
+            
+        }
+        label{
+            font-size: 20px;
+            color: black;
+            
+        }
+        input{
+            font-size: 18px;
+            padding: 10px;
+        }
+        button:hover{
+            background-color: #0000cd;
+        }
+    </style></head>
+    <html>
+        <body>
+            <div class="container">
+            <h1>SIGN UP....!</h1><br>
+            <form action="/signupSubmit" method="POST">
+               <label>USER NAME</label><br>
+               <input type="text" name="name" placeholder="enter your name"><br><br>
+                <label>EMAIL ID</label><br>
+                <input type="text" name="email" placeholder="enter your email id"><br><br>
+                <label>PASSWORD</label><br>
+                <input type="password" name="password" placeholder="create a password"><br><br>
+                <button>SIGN UP</button>
+            </form>
+            </div>
+        </body>
+</html>
